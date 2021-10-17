@@ -13,8 +13,11 @@ use App\Http\Controllers\MovieController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::resource('movie', MovieController::class);
+Route::resource('video', VideoController::class);
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('/video', function () {
+//     return view('dashboard');

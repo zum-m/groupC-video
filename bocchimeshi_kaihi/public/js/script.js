@@ -18,13 +18,13 @@ const Peer = window.Peer;
     SDK: ${sdkSrc ? sdkSrc.src : 'unknown'}
   `.trim();
 
-  // const getRoomModeByHash = () => (location.hash === '#sfu' ? 'sfu' : 'mesh');
+  const getRoomModeByHash = () => (location.hash === '#sfu' ? 'sfu' : 'mesh');
 
-  // roomMode.textContent = getRoomModeByHash();
-  // window.addEventListener(
-  //   'hashchange',
-  //   () => (roomMode.textContent = getRoomModeByHash())
-  // );
+  roomMode.textContent = getRoomModeByHash();
+  window.addEventListener(
+    'hashchange',
+    () => (roomMode.textContent = getRoomModeByHash())
+  );
 
   const localStream = await navigator.mediaDevices
     .getUserMedia({
@@ -61,12 +61,12 @@ const Peer = window.Peer;
   
     
 
-    // room.once('open', () => {
-    //   messages.textContent += '=== You joined ===\n';
-    // });
-    // room.on('peerJoin', peerId => {
-    //   messages.textContent += `=== ${peerId} joined ===\n`;
-    // });
+    room.once('open', () => {
+      messages.textContent += '=== You joined ===\n';
+    });
+    room.on('peerJoin', peerId => {
+      messages.textContent += `=== ${peerId} joined ===\n`;
+    });
 
     // Render remote stream for new peer join in the room
     room.on('stream', async stream => {
@@ -81,10 +81,10 @@ const Peer = window.Peer;
     console.log("here!")
     console.log(room.members.length)
     console.log(room.members.length)
-    // room.on('data', ({ data, src }) => {
-    //   // Show a message sent to the room and who sent
-    //   messages.textContent += `${src}: ${data}\n`;
-    // });
+    room.on('data', ({ data, src }) => {
+      // Show a message sent to the room and who sent
+      messages.textContent += `${src}: ${data}\n`;
+    });
 
     // for closing room members
     room.on('peerLeave', peerId => {
@@ -112,13 +112,13 @@ const Peer = window.Peer;
     sendTrigger.addEventListener('click', onClickSend);
     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
 
-    // function onClickSend() {
-    //   // Send message to all of the peers in the room via websocket
-    //   room.send(localText.value);
+    function onClickSend() {
+      // Send message to all of the peers in the room via websocket
+      room.send(localText.value);
 
-    //   messages.textContent += `${peer.id}: ${localText.value}\n`;
-    //   localText.value = '';
-    // }
+      messages.textContent += `${peer.id}: ${localText.value}\n`;
+      localText.value = '';
+    }
   });
 
   peer.on('error', console.error);

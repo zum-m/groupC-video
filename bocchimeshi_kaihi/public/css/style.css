@@ -1,5 +1,8 @@
 /* normalize */
-body { margin: 0; }
+body { 
+  margin: 0; 
+  background-color:#111;
+}
 
 /* global styles */
 video {
@@ -93,3 +96,16 @@ video {
     transform: translateX(0);
   }
 }
+
+img{
+  height:200px;
+}
+
+
+
+
+
+
+
+
+ 

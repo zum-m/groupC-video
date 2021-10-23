@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SkyWay - Room example</title>
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/button.css') }}">
     <script src="https://cdn.webrtc.ecl.ntt.com/skyway-4.4.1.js"></script>
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
   </head>
@@ -18,9 +19,10 @@
       <div class="room">
         <video id="js-local-stream" autoplay loop  height="360"></video>
       </div>
-      <div >
-        <button id="js-join-trigger">
-          Join
+      <div>
+        <h3>身だしなみは整いましたか？</h3>
+        <button id="js-join-trigger" class=btn>
+          
         </button>
       </div>
       <p class="meta" id="js-meta"></p>

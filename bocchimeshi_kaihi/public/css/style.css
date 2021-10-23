@@ -59,10 +59,11 @@ video {
 
 /* room */
 .room {
-  display: grid;
-  grid-template-columns: 30% 40% 30%;
+  /* display: grid; */
+  /* grid-template-columns: 30% 40% 30%; */
   gap: 8px;
-  margin: 0 8px;
+  margin: 8px;
+  text-align: center;
 }
 
 .room .remote-streams {
@@ -72,6 +73,23 @@ video {
 .room .messages {
   background-color: #eee;
   min-height: 100px;
-  padding: 8px;
+  padding: 300px;
   margin-top: 0;
+}
+
+
+
+.Headline{
+  animation: SlideIn 1.6s;
+}
+
+@keyframes SlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-464px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

@@ -44,6 +44,7 @@ const Peer = window.Peer;
     key: '5cf1d98f-7273-48ce-aff3-54cee85ff41b',
     debug: 3,
   }));
+  console.log(peer);
 
   // Register join handler
   joinTrigger.addEventListener('click', () => {
@@ -57,7 +58,6 @@ const Peer = window.Peer;
       mode: "sfu",
       stream: localStream,
     });
-    
   
     
 
@@ -109,8 +109,16 @@ const Peer = window.Peer;
       });
     });
 
+    // const sendText=()=>{
+      
+    // };
     sendTrigger.addEventListener('click', onClickSend);
-    leaveTrigger.addEventListener('click', () => room.close(), { once: true });
+    leaveTrigger.addEventListener('click',    setTimeout(room.close(),3000)
+ , { once: true });
+
+    // 🟡joinしたらで分岐処理？？
+    setTimeout(room.close(),3000);
+
 
     function onClickSend() {
       // Send message to all of the peers in the room via websocket
@@ -123,6 +131,20 @@ const Peer = window.Peer;
 
   peer.on('error', console.error);
 })();
+
+if (Array.length<5){
+  createNewRoom();
+  joinRoom
+  syoutai
+
+}
+
+
+
+
+
+
+
 
 // const Peer = window.Peer;
 
@@ -165,7 +187,7 @@ const Peer = window.Peer;
 //   localVideo.playsInline = true;
 //   await localVideo.play().catch(console.error);
 
-//   // eslint-disable-next-line require-atomic-updates
+// ⭐️🟡peerのインスタンス生成？  // eslint-disable-next-line require-atomic-updates
 //   const peer = (window.peer = new Peer({
 //     key: '5cf1d98f-7273-48ce-aff3-54cee85ff41b',
 //     debug: 3,
@@ -173,65 +195,72 @@ const Peer = window.Peer;
 
 //   // Register join handler
 //   joinTrigger.addEventListener('click', () => {
-//     // Note that you need to ensure the peer has connected to signaling server
-//     // before using methods of peer instance.
-//     if (!peer.open) {
+  //     if (!peer.open) {
 //       return;
 //     }
 
+// 🟦🟡roomの生成、立ち上げ？
 //     const room = peer.joinRoom(roomId.value, {
 //       mode: getRoomModeByHash(),
 //       stream: localStream,
 //     });
 
-//     room.once('open', () => {
-//       messages.textContent += '=== You joined ===\n';
-//     });
-//     room.on('peerJoin', peerId => {
-//       messages.textContent += `=== ${peerId} joined ===\n`;
-//     });
 
-//     // Render remote stream for new peer join in the room
-//     room.on('stream', async stream => {
-//       const newVideo = document.createElement('video');
-//       newVideo.srcObject = stream;
-//       newVideo.playsInline = true;
-//       // mark peerId to find it later at peerLeave event
-//       newVideo.setAttribute('data-peer-id', stream.peerId);
-//       remoteVideos.append(newVideo);
-//       await newVideo.play().catch(console.error);
-//     });
+        // 🟦room.onceのonceメソッドがホストの処理
+        // ここではルームオープン処理
+        //     room.once('open', () => {
+        //       messages.textContent += '=== You joined ===\n';
+        //     });
 
-//     room.on('data', ({ data, src }) => {
-//       // Show a message sent to the room and who sent
-//       messages.textContent += `${src}: ${data}\n`;
-//     });
+                // 🟦room.onのonメソッドが通話相手の処理
+                //相手の情報をとってきて参加のメッセージ処理
+                //     room.on('peerJoin', peerId => {
+                //       messages.textContent += `=== ${peerId} joined ===\n`;
+                //     });
 
-//     // for closing room members
-//     room.on('peerLeave', peerId => {
-//       const remoteVideo = remoteVideos.querySelector(
-//         `[data-peer-id="${peerId}"]`
-//       );
-//       remoteVideo.srcObject.getTracks().forEach(track => track.stop());
-//       remoteVideo.srcObject = null;
-//       remoteVideo.remove();
+                //相手側の配信の処理
+                //       //Render remote stream for new peer join in the room
+                //     room.on('stream', async stream => {
+                //       const newVideo = document.createElement('video');
+                //       newVideo.srcObject = stream;
+                //       newVideo.playsInline = true;
+                //       // mark peerId to find it later at peerLeave event
+                //       newVideo.setAttribute('data-peer-id', stream.peerId);
+                //       remoteVideos.append(newVideo);
+                //       await newVideo.play().catch(console.error);
+                //     });
 
-//       messages.textContent += `=== ${peerId} left ===\n`;
-//     });
+                //     room.on('data', ({ data, src }) => {
+                //       // Show a message sent to the room and who sent
+                //       messages.textContent += `${src}: ${data}\n`;
+                //     });
 
-//     // for closing myself
-//     room.once('close', () => {
-//       sendTrigger.removeEventListener('click', onClickSend);
-//       messages.textContent += '== You left ===\n';
-//       Array.from(remoteVideos.children).forEach(remoteVideo => {
-//         remoteVideo.srcObject.getTracks().forEach(track => track.stop());
-//         remoteVideo.srcObject = null;
-//         remoteVideo.remove();
-//       });
-//     });
+                // 参加者の退出処理// for closing room members
+                //     room.on('peerLeave', peerId => {
+                //       const remoteVideo = remoteVideos.querySelector(
+                //         `[data-peer-id="${peerId}"]`
+                //       );
+                //       remoteVideo.srcObject.getTracks().forEach(track => track.stop());
+                //       remoteVideo.srcObject = null;
+                //       remoteVideo.remove();
 
-//     sendTrigger.addEventListener('click', onClickSend);
-//     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
+                //       messages.textContent += `=== ${peerId} left ===\n`;
+                //     });
+
+        // 🟦ホストのルームクローズ処理
+            // for closing myself
+        //     room.once('close', () => {
+        //       sendTrigger.removeEventListener('click', onClickSend);
+        //       messages.textContent += '== You left ===\n';
+        //       Array.from(remoteVideos.children).forEach(remoteVideo => {
+        //         remoteVideo.srcObject.getTracks().forEach(track => track.stop());
+        //         remoteVideo.srcObject = null;
+        //         remoteVideo.remove();
+        //       });
+        //     });
+
+        //     sendTrigger.addEventListener('click', onClickSend);
+        //     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
 
 //     function onClickSend() {
 //       // Send message to all of the peers in the room via websocket

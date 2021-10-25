@@ -20,6 +20,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'room_name',
+        'room_open',
         'password',
     ];
 
@@ -41,4 +43,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function getAllOrderByUpdated_at()
+    {
+        // query=self::where('room_open', True);
+        return query::orderBy('updated_at', 'desc')->get();
+    }
+
+    public function tags()
+    {
+        return $this->belongToMany(Tag::class)
+        // ->using(Tag_User::class)
+        ->withPivot('tag_id');
+    }
 }
+

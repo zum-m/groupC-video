@@ -13,7 +13,11 @@ class VideoController extends Controller
      */
     public function index()
     {
-        //
+        // $tweets = Tweet::getAllOrderByUpdated_at();
+        return view('room.index', [
+        //   'rooms' => $rooms
+        'rooms' => []
+        ]);
     }
 
     /**

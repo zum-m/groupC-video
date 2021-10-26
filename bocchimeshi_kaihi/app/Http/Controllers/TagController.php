@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Tag;
+use Auth;
 
-class VideoController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +16,11 @@ class VideoController extends Controller
      */
     public function index()
     {
-        // ユーザーテーブルから更新順でroomがopenしているものを選ぶ
-        $users = User::getOpenedRoomOrderByUpdated_at();
-        // $tags = Tag::getCommon();
-        return view('room.index', [
-          'users' => $users
-        //  'tags' => $tags
-        // 'users' => []
+
+        $tags = Tag::get();
+       
+        return view('tag.index', [
+            'tags' => $tags
         ]);
     }
 
@@ -29,10 +29,14 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+
+    public function create(){
+        $tags = Tag::get();
+        return view('tag.create', [
+            'tags' => $tags
+        ]);
     }
+  
 
     /**
      * Store a newly created resource in storage.
@@ -42,7 +46,21 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_name, $match);
+        foreach($match[1] as $input)
+        {
+            //すでにデータがあれば取得し、なければデータを作成する
+            $tag=Tag::firstOrCreate(['name'=>$input]);
+            //$tagを初期化($tagに配列でデータが入ってしまうため)
+            $tag=null;
+            //入力されたタグのidを取得
+            $tag_id=Tag::where('name',$input)->get(['id']);
+            //タグとoutfitの紐付け
+            $user=User::find($user_id);
+            $user->tags()->attach($tag_id);
+            // ddd($tags);
+        };
+        return redirect()->route('tag.index');
     }
 
     /**

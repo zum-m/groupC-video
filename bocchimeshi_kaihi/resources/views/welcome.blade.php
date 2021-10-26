@@ -13,6 +13,7 @@
   </head>
   <body>
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+      <p>ログイン、registerのボタンを作る</p>
       @if (Route::has('login'))
           <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
               @auth
@@ -26,7 +27,7 @@
               @endauth
           </div>
       @endif
-      <script src="{{ asset('/js/sample.js') }}"></script> -->
+      <!-- <script src="{{ asset('/js/sample.js') }}"></script> 
       <div class="container" align="center">
         <div class="Headline">
           <img src="{{ asset('/img/ぼっち飯回避.jpg') }}"/>
@@ -43,7 +44,7 @@
       </div>
       <p class="meta" id="js-meta"></p>
     </div>
-    <script src="{{ asset('/js/script.js') }}"></script>
+    <script src="{{ asset('/js/script.js') }}"></script> -->
    
   <!-- <div id="myIdDisp"></div>
   <div id="desc"></div>

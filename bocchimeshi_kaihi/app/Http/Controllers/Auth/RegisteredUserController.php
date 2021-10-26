@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Models\Tag;
+
 
 class RegisteredUserController extends Controller
 {
@@ -47,10 +49,16 @@ class RegisteredUserController extends Controller
             'room_name' => $request->room_name,
         ]);
 
+    
+
+
+
         event(new Registered($user));
 
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
+
+
 }

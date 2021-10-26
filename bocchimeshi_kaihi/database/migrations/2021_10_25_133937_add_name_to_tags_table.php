@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTagUsersTable extends Migration
+class AddNameToTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateTagUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag_users', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('tags', function (Blueprint $table) {
+            $table->string('name')->after('id');;
         });
     }
 
@@ -26,6 +25,8 @@ class CreateTagUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag_users');
+        Schema::table('tags', function (Blueprint $table) {
+            //
+        });
     }
 }

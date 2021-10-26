@@ -17,8 +17,18 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('room.index')" :active="request()->routeIs('room.index')">
                         {{ __('ルーム一覧') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('tag.create')" :active="request()->routeIs('tag.index')">
+                        {{ __('タグ追加') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('tag.index')" :active="request()->routeIs('tage.index')">
+                        {{ __('タグ一覧') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -40,7 +50,6 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
-                        <a>aa</a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 

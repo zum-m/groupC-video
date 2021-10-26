@@ -7,9 +7,9 @@
 
     <script src="{{ asset('/js/sample.js') }}"></script> 
       <div class="container" align="center">
-        <div class="Headline">
+        <!-- <div class="Headline">
           <img src="{{ asset('/img/ぼっち飯回避.jpg') }}"/>
-        </div>  
+        </div>   -->
         <div class="room">
           <video id="js-local-stream" autoplay loop  height="360"></video>
         </div>
@@ -17,12 +17,12 @@
         <div>
           <h3>身だしなみは整いましたか？</h3>
           <button id="js-join-trigger" class=btn>
-              <p>ルーム名：{{ Auth::user()->room_name }}</p>
+              <p>ルーム名：{{ Auth::user()->room_name }}(ここにルーム名編集のボタン)</p>
               ルームに入室！
           </button>
           <br>
-          <button id="js-join-trigger" class=btn>
-              ルームを探す！(ここにルーム一覧のリンクを貼る) 
+          <button class=btn>
+              ルームを探す！(ここにルーム一覧に飛ぶ) 
           </button>
         </div>
       </div>

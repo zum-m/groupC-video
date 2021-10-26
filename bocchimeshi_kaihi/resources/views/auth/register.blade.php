@@ -14,7 +14,7 @@
 
             <!-- Name -->
             <div>
-                <x-label for="name" :value="__('Name')" />
+                <x-label for="name" :value="__('ユーザー名')" />
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>
@@ -47,12 +47,14 @@
 
             <!-- ルーム名設定 -->
             <div class="mt-4">
-                <x-label for="room_name" :value="__('roome name')" />
+                <x-label for="room_name" :value="__('ルーム名（変更可能）')" />
 
                 <x-input id="room_name" class="block mt-1 w-full" type="text" name="room_name" :value="old('room_name')" required autofocus />
             </div>
+          
 
-            
+
+
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">

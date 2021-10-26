@@ -55,14 +55,14 @@ class User extends Authenticatable
 
     public function tags()
     {
-        return $this->belongToMany(Tag::class)
+        return $this->belongsToMany(Tag::class)
         ->withTimestamps();
         // ->using(Tag_User::class)
         // ->withPivot('tag_id');
     }
     public function mytags()
     {
-        return $this->belongToMany(Tag::class)
+        return $this->belongsToMany(Tag::class)
         // ->using(Tag_User::class)
         ->withPivot('tag_id');
     }

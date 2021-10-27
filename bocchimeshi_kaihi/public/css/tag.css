@@ -9,3 +9,15 @@
 	border: 1px solid #0000ee;
 	border-radius: 2em;
 }
+
+.common_tag {
+	display: inline-block;
+	margin: 0 .1em .6em 0;
+	padding: .6em;
+	line-height: 1;
+	text-decoration: none;
+	color: #fff;
+	background-color: #0000ee;
+	border: 1px solid #0000ee;
+	border-radius: 2em;
+}

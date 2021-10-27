@@ -22,14 +22,18 @@
 
               <tbody>
                 
-                @foreach (array_map(NULL, $rooms, $commons_tags) as [$room, $common_tags])
+                @foreach (array_map(NULL, $rooms, $commons_tags, $owners_tags) as [$room, $common_tags, $owner_tags])
                   <tr class="hover:bg-grey-lighter">
                     <td class="py-4 px-6 border-b border-grey-light">
                       <h3 class="text-left font-bold text-lg text-grey-dark">{{$room}}(ルームに飛ぶためのリンク)</h3>
                     <div class="flex">
-                      <p>共通のタグ:<p>
-                      @foreach ($common_tags as $common_tag)
-                        <span class="tag">{{$common_tag}}</span>
+                      <p>ルーム所有者のタグ:<p>
+                      @foreach ($owner_tags as $owner_tag)
+                        @if(in_array($owner_tag, $common_tags))
+                          <span class="common_tag">{{$owner_tag}}</span>
+                        @else
+                          <span class="tag">{{$owner_tag}}</span>
+                        @endif
                       @endforeach
                     </div>
                   </td>

@@ -33,12 +33,12 @@ class VideoController extends Controller
         $commons_tags=array();
         foreach($owners_id as $owner_id){
             $owner_tags=$user->find($owner_id)->mytags()->pluck('tag_id')->toArray();
-            $owners_tags[]=$owner_tags;
+            $owners_tags[]=$tags->find($owner_tags)->pluck('name')->toArray();
             $common_id=array_intersect($owner_tags,$tag_id);
             $commons_tags[]=array_column($tags->find($common_id)->toArray(),'name');
         }
-
         return view('room.index', [
+            'owner_id'=>$owners_id,
             'rooms' => $users->pluck('room_name')->toArray(),
             'commons_tags' => $commons_tags,
             'owners_tags'=>$owners_tags,

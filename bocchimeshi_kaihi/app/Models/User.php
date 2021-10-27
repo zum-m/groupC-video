@@ -47,9 +47,7 @@ class User extends Authenticatable
 
     public static function getOpenedRoomOrderByUpdated_at()
     {
-        // $open = self::where('room_open', 0);
-        // return $open::orderBy('updated_at', 'desc')->get();
-        // return self::orderBy('updated_at', 'desc')->get();
+
         return self::where('room_open', 0)->get();
     }
 
@@ -57,13 +55,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Tag::class)
         ->withTimestamps();
-        // ->using(Tag_User::class)
-        // ->withPivot('tag_id');
     }
     public function mytags()
     {
         return $this->belongsToMany(Tag::class)
-        // ->using(Tag_User::class)
         ->withPivot('tag_id');
     }
 

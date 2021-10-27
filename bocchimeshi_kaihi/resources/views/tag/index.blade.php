@@ -29,7 +29,6 @@
                         <!-- <span class="badge badge-pill badge-info">{{$tag->name}}</span> -->
                         <span class="tag">{{$tag->name}}</span>
 
-
                 @endforeach
                 </tbody>
             </table>

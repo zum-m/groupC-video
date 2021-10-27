@@ -31,6 +31,7 @@ class TagController extends Controller
      */
 
     public function create(){
+        // 自分のタグだけにする
         $tags = Tag::get();
         return view('tag.create', [
             'tags' => $tags
@@ -46,7 +47,7 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_name, $match);
+        preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag, $match);
         foreach($match[1] as $input)
         {
             //すでにデータがあれば取得し、なければデータを作成する
@@ -56,9 +57,10 @@ class TagController extends Controller
             //入力されたタグのidを取得
             $tag_id=Tag::where('name',$input)->get(['id']);
             //タグとoutfitの紐付け
-            $user=User::find($user_id);
+            $user=User::find(Auth::id());
+            // $user_id=$user->id
             $user->tags()->attach($tag_id);
-            // ddd($tags);
+
         };
         return redirect()->route('tag.index');
     }

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+use Request;
 use App\Models\User;
 use App\Models\Tag;
 use Auth;
+
 
 class VideoController extends Controller
 {
@@ -52,7 +54,7 @@ class VideoController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -72,9 +74,10 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $id = Request::input('id');
+        return view('room.show', compact('id'));
     }
 
     /**

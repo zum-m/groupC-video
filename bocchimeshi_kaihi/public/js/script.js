@@ -53,7 +53,7 @@ const Peer = window.Peer;
       return;
     }
 
-    const room = peer.joinRoom('room1', {
+    const room = peer.joinRoom(roomId.value, {
       mode: "sfu",
       stream: localStream,
     });

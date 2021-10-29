@@ -21,11 +21,10 @@
           <div>
             <h3>身だしなみは整いましたか？</h3>
             <p>ルーム名：{{ Auth::user()->room_name }}(ここにルーム名編集のボタン)</p>
-            <form action="{{action('VideoController@show')}}" method="POST">
+            <form action="{{ url('/join')}}" method="POST">
               @csrf
               <input type="hidden" name="id" value="{{Auth::user()->id}}" />
               <input type="submit" name="submit" value="入室！" class=btn/>
-              <!-- <button　type="submit" class=btn>入室！</button> -->
             </form>
           </div>
             <br>

@@ -26,6 +26,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
-Route::post('/join','App\Http\Controllers\VideoController@show');
+Route::post('/join',[VideoController::class,'show']);
 
 require __DIR__.'/auth.php';

@@ -1,5 +1,5 @@
 <head>
-   
+    <script src="https://cdn.webrtc.ecl.ntt.com/skyway-4.4.1.js"></script> 
 </head>
 <body>
      <script src="{{ asset('/js/sample.js') }}"></script> 
@@ -17,16 +17,12 @@
             <button id="js-join-trigger" class=btn>
               開始
             </button>
+            
             <button id="js-leave-trigger">Leave</button>
         </div>
       </div>
       <p class="meta" id="js-meta"></p>
     </div>
-    <script src="{{ asset('/js/script.js') }}"></script> -->
+    <script src="{{ asset('/js/script.js') }}"></script> 
    
-  <!-- <div id="myIdDisp"></div>
-  <div id="desc"></div>
-  <button id="autoJoinButton">自動入室</button>
-  <div id="roomList"></div>
-  <div id="logList"></div> -->
 </body>

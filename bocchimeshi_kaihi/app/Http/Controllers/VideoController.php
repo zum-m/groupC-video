@@ -40,7 +40,7 @@ class VideoController extends Controller
             $commons_tags[]=array_column($tags->find($common_id)->toArray(),'name');
         }
         return view('room.index', [
-            'owner_id'=>$owners_id,
+            'owners_id'=>$owners_id,
             'rooms' => $users->pluck('room_name')->toArray(),
             'commons_tags' => $commons_tags,
             'owners_tags'=>$owners_tags,

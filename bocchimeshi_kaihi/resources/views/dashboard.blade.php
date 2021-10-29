@@ -27,10 +27,9 @@
               <input type="submit" name="submit" value="入室！" class=btn/>
             </form>
           </div>
-            <br>
-            <button class=btn>
-                ルームを探す！(ここにルーム一覧に飛ぶ) 
-            </button>
+          <x-nav-link :href="route('room.index')" :active="request()->routeIs('room.index')">
+          ルームを探す！
+          </x-nav-link>
           </div>
         </div>
         <p class="meta" id="js-meta"></p>

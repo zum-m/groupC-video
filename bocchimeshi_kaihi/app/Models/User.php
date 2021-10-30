@@ -50,7 +50,7 @@ class User extends Authenticatable
     public static function getOpenedRoomOrderByUpdated_at()
     {
 
-        return self::where('room_open', 0)->get();
+        return self::where('room_open', 1)->get();
     }
 
     public function tags()

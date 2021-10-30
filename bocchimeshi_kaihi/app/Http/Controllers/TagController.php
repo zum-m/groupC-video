@@ -31,8 +31,10 @@ class TagController extends Controller
      */
 
     public function create(){
-        // 自分のタグだけにする
-        $tags = Tag::get();
+        $user = new User;
+        $my_id = Auth::user()->id;
+        $tags_id = $user->find($my_id)->mytags()->pluck('tag_id')->toArray();
+        $tags = Tag::find($tags_id)->pluck('name')->toArray();
         return view('tag.create', [
             'tags' => $tags
         ]);
@@ -62,7 +64,7 @@ class TagController extends Controller
             $user->tags()->attach($tag_id);
 
         };
-        return redirect()->route('tag.index');
+        return redirect()->route('tag.create');
     }
 
     /**

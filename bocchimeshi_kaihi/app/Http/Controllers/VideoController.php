@@ -119,6 +119,12 @@ class VideoController extends Controller
     {
         //
     }
+    public function roomLeave(){
+        $room_status = Request::input('room_status');
+        if (is_numeric($room_status)){
+            User::roomStatusChange($room_status);
+        }
+    }
 
 
 }

@@ -13,7 +13,7 @@ class AddUserIdAndTagIdToTagUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('tag_users', function (Blueprint $table) {
+        Schema::table('tag_user', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->after('id');
             $table->unsignedBigInteger('tag_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -30,7 +30,7 @@ class AddUserIdAndTagIdToTagUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('tag_users', function (Blueprint $table) {
+        Schema::table('tag_user', function (Blueprint $table) {
             //
         });
     }

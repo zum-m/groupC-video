@@ -26,6 +26,6 @@ class CreateTagUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag_users');
+        Schema::dropIfExists('tag_user');
     }
 }

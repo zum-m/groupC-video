@@ -22,10 +22,15 @@
 
               <tbody>
                 
-                @foreach (array_map(NULL, $rooms, $commons_tags, $owners_tags) as [$room, $common_tags, $owner_tags])
+                @foreach (array_map(NULL, $rooms, $commons_tags, $owners_tags, $owners_id) as [$room, $common_tags, $owner_tags, $owner_id])
                   <tr class="hover:bg-grey-lighter">
                     <td class="py-4 px-6 border-b border-grey-light">
-                      <h3 class="text-left font-bold text-lg text-grey-dark">{{$room}}(ルームに飛ぶためのリンク)</h3>
+                      <h3 class="text-left font-bold text-lg text-grey-dark">{{$room}}</h3>
+                      <form action="{{ url('/join')}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$owner_id}}" />
+                        <input type="submit" name="submit" value="入室！" class=btn/>
+                      </form>
                     <div class="flex">
                       <p>ルーム所有者のタグ:<p>
                       @foreach ($owner_tags as $owner_tag)

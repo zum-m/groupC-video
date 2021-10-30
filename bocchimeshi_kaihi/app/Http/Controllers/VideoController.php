@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+use Request;
 use App\Models\User;
 use App\Models\Tag;
 use Auth;
+
 
 class VideoController extends Controller
 {
@@ -38,7 +40,7 @@ class VideoController extends Controller
             $commons_tags[]=array_column($tags->find($common_id)->toArray(),'name');
         }
         return view('room.index', [
-            'owner_id'=>$owners_id,
+            'owners_id'=>$owners_id,
             'rooms' => $users->pluck('room_name')->toArray(),
             'commons_tags' => $commons_tags,
             'owners_tags'=>$owners_tags,
@@ -52,7 +54,7 @@ class VideoController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -72,9 +74,15 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $id = Request::input('id');
+        $room_status = Request::input('room_status');
+        if (is_numeric($room_status)){
+            User::roomStatusChange($room_status);
+        }
+
+        return view('room.show', compact('id'));
     }
 
     /**
@@ -97,7 +105,8 @@ class VideoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+
     }
 
     /**
@@ -110,4 +119,6 @@ class VideoController extends Controller
     {
         //
     }
+
+
 }

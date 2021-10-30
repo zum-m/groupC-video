@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Auth;
+use Request;
 
 
 class User extends Authenticatable
@@ -48,7 +50,7 @@ class User extends Authenticatable
     public static function getOpenedRoomOrderByUpdated_at()
     {
 
-        return self::where('room_open', 0)->get();
+        return self::where('room_open', 1)->get();
     }
 
     public function tags()
@@ -60,6 +62,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Tag::class)
         ->withPivot('tag_id');
+    }
+
+    public static function roomStatusChange($room_status){
+        $my_id = Auth::user()->id;
+        $user=User::find($my_id);
+        $user->room_open=$room_status;
+        $user->save();
     }
 
 }

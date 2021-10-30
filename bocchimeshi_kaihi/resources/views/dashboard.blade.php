@@ -24,6 +24,7 @@
             <form action="{{ url('/join')}}" method="POST">
               @csrf
               <input type="hidden" name="id" value="{{Auth::user()->id}}" />
+              <input type="hidden" name="room_status" value=1 />
               <input type="submit" name="submit" value="入室！" class=btn/>
             </form>
           </div>

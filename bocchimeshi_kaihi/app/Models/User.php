@@ -77,5 +77,12 @@ class User extends Authenticatable
         return Tag::find($tags_id)->pluck('name')->toArray();
     }
 
+    public static function roomNameChange($room_name){
+        $my_id = Auth::user()->id;
+        $user=User::find($my_id);
+        $user->room_name=$room_name;
+        $user->save();
+    }
+
 }
 

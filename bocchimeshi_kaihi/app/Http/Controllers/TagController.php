@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Tag;
+use App\Models\Tag_User;
 use Auth;
 
 class TagController extends Controller
@@ -31,9 +32,12 @@ class TagController extends Controller
      */
 
     public function create(){
-
+        $my_id = Auth::user()->id;
+        $tags_id = User::find($my_id)->mytags()->pluck('tag_id')->toArray();
+        $tags=Tag::find($tags_id);
         return view('tag.create', [
-            'tags' => User::myTagsName()
+            'tags' => $tags->pluck('name')->toArray(),
+            'tag_id'=> $tags->pluck('id')->toArray()
 
         ]);
     }
@@ -52,7 +56,9 @@ class TagController extends Controller
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag, $match);
         foreach($match[1] as $input)
         {
-            $tag_exist=Tag::where('name', $input)->first();
+            $tag_id=Tag::where('name', $input)->first()->id;
+            $my_id=Auth::user()->id;
+            $tag_exist=Tag_User::where('tag_id',$tag_id)->where('user_id', $my_id)->first();
             if($tag_exist==NULL){
                 Tag::firstOrCreate(['name'=>$input]);
                 $tag_id=Tag::where('name',$input)->get(['id']);
@@ -107,6 +113,9 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $my_id = Auth::user()->id;
+        $result = Tag_User::where('tag_id',$id)->where('user_id', $my_id)->delete();
+        
+        return redirect()->route('tag.create');
     }
 }

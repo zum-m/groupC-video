@@ -71,5 +71,11 @@ class User extends Authenticatable
         $user->save();
     }
 
+    public static function myTagsName() {
+        $my_id = Auth::user()->id;
+        $tags_id = User::find($my_id)->mytags()->pluck('tag_id')->toArray();
+        return Tag::find($tags_id)->pluck('name')->toArray();
+    }
+
 }
 

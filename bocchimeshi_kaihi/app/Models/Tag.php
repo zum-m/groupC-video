@@ -26,10 +26,12 @@ class Tag extends Model
 
     public function store()
     {
-        $tags = Tag::create([
+        $tags=Tag::create([
             'name' => $request->tag,
         ]);
     }
+
+
 
 
     

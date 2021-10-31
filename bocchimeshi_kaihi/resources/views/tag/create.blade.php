@@ -11,7 +11,7 @@
 	<div class="text-center">
 		<p>あなたのタグ</p>
 	　@foreach($tags as $tag)
-			<span class="tag">{{$tag}}</span>
+			<span class="tag">#{{$tag}}</span>
 		@endforeach
 	</div>
 	<div class="py-12">

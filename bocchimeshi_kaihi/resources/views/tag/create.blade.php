@@ -1,5 +1,6 @@
 <head>
     <link rel="stylesheet" href="{{ asset('css/tag.css') }}">
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 <body>
 	<x-app-layout>
@@ -8,10 +9,17 @@
 		{{ __('タグ追加') }}
 		</h2>
 	</x-slot>
-	<div class="text-center">
-		<p>あなたのタグ</p>
+	<div>
+		<p class="text-center font-semibold text-xl text-gray-800 leading-tight">あなたのタグ</p>
 	　@foreach($tags as $tag)
-			<span class="tag">{{$tag}}</span>
+			<span class="tag">#{{$tag}}</span>
+			<form action="{{ route('tag.destroy',$tag_id) }}" method="POST" style="display:inline-flex">
+				@method('delete')
+				@csrf
+				<button type="submit" class="mr-2 ml-2 text-sm hover:bg-gray-200 hover:shadow-none py-1 px-2 focus:outline-none focus:shadow-outline">
+				<i class="far fa-times-circle"></i>
+				</button>
+			</form>
 		@endforeach
 	</div>
 	<div class="py-12">

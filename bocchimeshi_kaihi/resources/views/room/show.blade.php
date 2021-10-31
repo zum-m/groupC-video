@@ -4,9 +4,6 @@
 <body>
      <script src="{{ asset('/js/sample.js') }}"></script> 
       <div class="container" align="center">
-        <!-- <div class="Headline">
-          <img src="{{ asset('/img/ぼっち飯回避.jpg') }}"/>
-        </div>   -->
         <div class="room">
           <video id="js-local-stream" autoplay loop  height="360"></video>
         </div>
@@ -14,11 +11,16 @@
         <p>{{$id}}</p>
         <div>
             <input type="hidden" id="js-room-id" value="{{$id}}">
-            <button id="js-join-trigger" class=btn>
+            <button id="js-join-trigger" class=btn onclick="disabled = true;">
               開始
             </button>
             
-            <button id="js-leave-trigger">Leave</button>
+            <form action="{{ url('/dashboard') }}" method="POST">
+                @csrf
+                <input type="hidden" name="id" value="{{Auth::user()->id}}" />
+                <input type="hidden" name="room_status" value=0 />
+                <button id="js-leave-trigger">退室</button>
+              </form>
         </div>
       </div>
       <p class="meta" id="js-meta"></p>

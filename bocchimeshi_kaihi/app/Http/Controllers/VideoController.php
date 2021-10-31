@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Request;
 use App\Models\User;
 use App\Models\Tag;
+use Validator;
 use Auth;
 
 
@@ -93,7 +94,7 @@ class VideoController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -105,7 +106,19 @@ class VideoController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        // $validator = Validator::make($request->all(), [
+        //     'room_name' => 'required | max:255'
+        // ]);
+        // if ($validator->fails()) {
+        //     return redirect()
+        //       ->route('room.update', $id)
+        //       ->withInput()
+        //       ->withErrors($validator);
+        //   }
+        // $result = User::find($id)->update($request->all());
+        $room_name = Request::input('room_name');
+        $redult = User::roomNameChange($room_name);
+        return view('dashboard');
 
     }
 
@@ -119,11 +132,17 @@ class VideoController extends Controller
     {
         //
     }
-    public function roomLeave(){
+
+    public function statuschangeleave()
+    {
+        $id = Request::input('id');
         $room_status = Request::input('room_status');
+        // dd($room_status);
         if (is_numeric($room_status)){
             User::roomStatusChange($room_status);
         }
+
+        return view('dashboard', compact('id'));
     }
 
 

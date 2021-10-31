@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Tag;
+use App\Models\Tag_User;
 use Auth;
 
 class TagController extends Controller
@@ -31,12 +32,13 @@ class TagController extends Controller
      */
 
     public function create(){
-        $user = new User;
         $my_id = Auth::user()->id;
-        $tags_id = $user->find($my_id)->mytags()->pluck('tag_id')->toArray();
-        $tags = Tag::find($tags_id)->pluck('name')->toArray();
+        $tags_id = User::find($my_id)->mytags()->pluck('tag_id')->toArray();
+        $tags=Tag::find($tags_id);
         return view('tag.create', [
-            'tags' => $tags
+            'tags' => $tags->pluck('name')->toArray(),
+            'tag_id'=> $tags->pluck('id')->toArray()
+
         ]);
     }
   
@@ -49,19 +51,21 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
+        $my_tags=User::myTagsName();
+   
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag, $match);
         foreach($match[1] as $input)
         {
-            //すでにデータがあれば取得し、なければデータを作成する
-            $tag=Tag::firstOrCreate(['name'=>$input]);
-            //$tagを初期化($tagに配列でデータが入ってしまうため)
-            $tag=null;
-            //入力されたタグのidを取得
-            $tag_id=Tag::where('name',$input)->get(['id']);
-            //タグとoutfitの紐付け
-            $user=User::find(Auth::id());
-            // $user_id=$user->id
-            $user->tags()->attach($tag_id);
+            $tag_id=Tag::where('name', $input)->first()->id;
+            $my_id=Auth::user()->id;
+            $tag_exist=Tag_User::where('tag_id',$tag_id)->where('user_id', $my_id)->first();
+            if($tag_exist==NULL){
+                Tag::firstOrCreate(['name'=>$input]);
+                $tag_id=Tag::where('name',$input)->get(['id']);
+                $user=User::find(Auth::id());
+                $user->tags()->attach($tag_id);
+            }
+
 
         };
         return redirect()->route('tag.create');
@@ -109,6 +113,9 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $my_id = Auth::user()->id;
+        $result = Tag_User::where('tag_id',$id)->where('user_id', $my_id)->delete();
+        
+        return redirect()->route('tag.create');
     }
 }

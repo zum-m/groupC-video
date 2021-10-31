@@ -26,21 +26,21 @@
                   <tr class="hover:bg-grey-lighter">
                     <td class="py-4 px-6 border-b border-grey-light">
                       <h3 class="text-left font-bold text-lg text-grey-dark">{{$room}}</h3>
-                      <form action="{{ url('/join')}}" method="POST">
+                    <div class="flex tag-list">
+                      <p>ルーム所有者のタグ:<p>
+                      @foreach ($owner_tags as $owner_tag)
+                        @if(in_array($owner_tag, $common_tags))
+                          <span class="common_tag">#{{$owner_tag}}</span>
+                        @else
+                          <span class="tag">#{{$owner_tag}}</span>
+                        @endif
+                      @endforeach
+                    </div>
+                    <form action="{{ url('/join')}}" method="POST">
                         @csrf
                         <input type="hidden" name="id" value="{{$owner_id}}" />
                         <input type="submit" name="submit" value="入室！" class=btn/>
                       </form>
-                    <div class="flex">
-                      <p>ルーム所有者のタグ:<p>
-                      @foreach ($owner_tags as $owner_tag)
-                        @if(in_array($owner_tag, $common_tags))
-                          <span class="common_tag">{{$owner_tag}}</span>
-                        @else
-                          <span class="tag">{{$owner_tag}}</span>
-                        @endif
-                      @endforeach
-                    </div>
                   </td>
                 </tr>
                 @endforeach

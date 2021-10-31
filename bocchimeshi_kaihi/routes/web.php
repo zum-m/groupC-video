@@ -27,5 +27,6 @@ Route::get('/dashboard', function () {
 
 
 Route::post('/join',[VideoController::class,'show']);
+Route::post('/dashboard',[VideoController::class,'statuschangeleave']);
 
 require __DIR__.'/auth.php';

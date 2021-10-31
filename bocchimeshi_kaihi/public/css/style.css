@@ -101,7 +101,14 @@ img{
   height:200px;
 }
 
-
+.contents {
+  overflow: hidden;
+}
+.item {
+  float: left;
+  padding: 20px 30px;
+  text-align: center;
+}
 
 
 

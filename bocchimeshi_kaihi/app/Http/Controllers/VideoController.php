@@ -133,5 +133,17 @@ class VideoController extends Controller
         //
     }
 
+    public function statuschangeleave()
+    {
+        $id = Request::input('id');
+        $room_status = Request::input('room_status');
+        // dd($room_status);
+        if (is_numeric($room_status)){
+            User::roomStatusChange($room_status);
+        }
+
+        return view('dashboard', compact('id'));
+    }
+
 
 }

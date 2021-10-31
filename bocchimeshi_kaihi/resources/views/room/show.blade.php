@@ -15,7 +15,12 @@
               開始
             </button>
             
-            <button id="js-leave-trigger">Leave</button>
+            <form action="{{ url('/dashboard') }}" method="POST">
+                @csrf
+                <input type="hidden" name="id" value="{{Auth::user()->id}}" />
+                <input type="hidden" name="room_status" value=0 />
+                <button id="js-leave-trigger">退室</button>
+              </form>
         </div>
       </div>
       <p class="meta" id="js-meta"></p>
